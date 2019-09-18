@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\pst3\.Rider2019.1\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\pst3\.Rider2019.1\system\resharper-host\local\Transient\ReSharperHost\v191\SolutionCaches\_.19.00" t="ExcludeRecursive" />
+    <e p="E:\Project\Multiplayer\Websocket_Organ3D Demo\WebSocket Demo Node\Unity-NodeJS-Game-master\Server" t="IncludeFlat">
+      <e p="node_modules\express" t="IncludeRecursive" />
+      <e p="node_modules\localStorage" t="IncludeRecursive" />
+      <e p="node_modules\shortid" t="IncludeRecursive" />
+      <e p="node_modules\socket.io" t="IncludeRecursive" />
+    </e>
+  </component>
+</project>
