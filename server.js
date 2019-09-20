@@ -7,10 +7,11 @@ var players = [];
 
 // var playerSpeed = 3;
 
-var UserProfile = function (serverId, username, roomId) {
+var UserProfile = function (serverId, username, roomId , webrtcID) {
     this.serverId = serverId;
     this.username = username;    
     this.roomId = roomId;
+    this.webrtcID = webrtcID;
 };
 
 
@@ -42,8 +43,8 @@ io.on('connection', function (socket)
         },
         lastMoveTime : 0,
         name:"Player",
-        room:"room"
-
+        room:"room",
+        webrtcId:"webrtcId"
     };
 
     players[thisPlayerId] = player;
@@ -81,12 +82,15 @@ io.on('connection', function (socket)
         socket.join(data.roomId, (err) => {
             if(!err)
             {
+                
                 socket.broadcast.to(data.roomId).emit('on_join',data);
                 //socket.broadcast.to(Room_ID).emit('spawn', {id:thisPlayerId});
                 players[thisPlayerId].name =data.username;
                 players[thisPlayerId].room =data.roomId;
-                socket.broadcast.to(data.roomId).emit('spawn', {id:thisPlayerId,name:data.username} );
-                socket.broadcast.to(data.roomId).emit('requestPosition');   
+                players[thisPlayerId].webrtcId =data.webrtcID;
+                socket.broadcast.to(data.roomId).emit('spawn', {id:thisPlayerId,name:data.username,webrtcId:data.webrtcID});
+                
+                   
                 
                 try{
                 for(var playerId in players){
@@ -95,8 +99,8 @@ io.on('connection', function (socket)
                         continue;
 
                     if(players[playerId].room == data.roomId)
-                    {
-                        socket.emit('spawn', {id:players[playerId].id,name:players[playerId].name} );
+                    {                        
+                        socket.emit('spawn', {id:players[playerId].id,name:players[playerId].name,webrtcId:players[playerId].webrtcId});
                     }
                     //socket.emit('spawn',data);
                 };
